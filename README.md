@@ -1,6 +1,6 @@
-# Windows Machine Initialization Script
+# machine-init
 
-This PowerShell script (`init-windows-machine.ps1`) automates the setup of a new Windows machine. It performs several key tasks to get your system ready, including:
+This repository contains scripts to automate the setup of a new development machine.
 
 -   **Admin Privilege Check**: Ensures the script is run with necessary administrative rights.
 -   **Software Installation**: Installs essential tools like Git, Python, and Node.js using Winget.
@@ -9,12 +9,24 @@ This PowerShell script (`init-windows-machine.ps1`) automates the setup of a new
 
 ## Usage
 
-1.  **Download the script**: Clone this repository or download `init-windows-machine.ps1` to your new Windows machine.
-2.  **Run as Administrator**: Open PowerShell as an administrator.
-3.  **Execute the script**: Navigate to the directory where you saved the script and run:
-    ```powershell
-    .\init-windows-machine.ps1
+The easiest way to run the setup is using the provided batch file, which automatically handles administrator privileges and execution policy restrictions:
+
+1.  **Run the Batch File**: Double-click `run-setup.bat` or run it from a terminal.
+    ```cmd
+    .\run-setup.bat
     ```
+
+Alternatively, you can run the PowerShell script manually:
+
+1.  **Open PowerShell as Administrator**.
+2.  **Navigate** to the directory where you saved the script.
+3.  **Execute the script** bypassing the execution policy:
+    ```powershell
+    powershell -ExecutionPolicy Bypass -File .\init-windows-machine.ps1
+    ```
+
+### Execution Policy Error
+If you see an error like `File ... cannot be loaded because running scripts is disabled on this system`, it means your PowerShell execution policy is too restrictive. The methods above (using `run-setup.bat` or the `-ExecutionPolicy Bypass` flag) will resolve this for the current session without changing your global system settings.
 
 ## Important Notes
 
