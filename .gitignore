@@ -1,0 +1,21 @@
+# Logs
+*.log
+
+# Temp files
+*.tmp
+*~
+#*#
+*.bak
+*.swp
+._*
+
+# Windows Thumbnail Cache Files
+Thumbs.db
+ehthumbs.db
+
+# Windows Recycle Bin
+$RECYCLE.BIN/
+
+# System Files
+Desktop.ini
+Icon?
