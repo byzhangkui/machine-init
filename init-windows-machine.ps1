@@ -40,19 +40,30 @@ $env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";
 Write-Host "Installing Claude Code..." -ForegroundColor Yellow
 try {
     irm https://claude.ai/install.ps1 | iex
-} catch {
+}
+catch {
     Write-Warning "Failed to install Claude Code. You may need to install it manually."
 }
 
-# 6. Install Gemini and Codex via npm
+# 6. Install pnpm via npm
+Write-Host "Installing pnpm..." -ForegroundColor Yellow
+if (Get-Command npm -ErrorAction SilentlyContinue) {
+    npm install -g pnpm
+}
+else {
+    Write-Warning "npm not found. Skipping pnpm installation. Please run 'npm install -g pnpm' manually after Node.js is available."
+}
+
+# 7. Install Gemini and Codex via npm
 Write-Host "Installing Gemini and Codex CLI..." -ForegroundColor Yellow
 if (Get-Command npm -ErrorAction SilentlyContinue) {
     npm install -g @google/gemini-cli @openai/codex
-} else {
+}
+else {
     Write-Warning "npm not found. Skipping Gemini and Codex installation. Please restart your shell and run 'npm install -g @google/gemini-cli @openai/codex' manually."
 }
 
-# 7. Automatic PATH Fix for .local/bin and npm
+# 8. Automatic PATH Fix for .local/bin and npm
 Write-Host "Configuring Environment Variables..." -ForegroundColor Cyan
 $userPath = [System.Environment]::GetEnvironmentVariable("Path", "User")
 $npmPrefix = if (Get-Command npm -ErrorAction SilentlyContinue) { (npm config get prefix).Trim() } else { $null }
